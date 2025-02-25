@@ -1,7 +1,7 @@
 use std::env;
 use anyhow::anyhow;
 use axum::Json;
-use dixxxie::response::{HttpMessage, HttpResult};
+use adjust::response::{HttpMessage, HttpResult};
 use lazy_static::lazy_static;
 use lettre::{message::header::ContentType, Message as SmtpMessage, SmtpTransport, Transport};
 use serde::{Deserialize, Serialize};
@@ -24,7 +24,7 @@ impl MailService {
   pub fn send(
     message: Message,
     transport: SmtpTransport
-  ) -> HttpResult<Json<HttpMessage>> {
+  ) -> HttpResult<HttpMessage> {
     let msg = SmtpMessage::builder()
       // по всей видимости, EMAIL_ADDRESS должен быть x@domain.com
       .from(EMAIL_ADDRESS.parse().map_err(|e| anyhow!("Не получилось запарсить EMAIL_ADDRESS: {e}"))?)

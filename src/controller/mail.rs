@@ -1,21 +1,24 @@
-use crate::service::mail::{MailService, Message};
+use crate::{service::mail::{MailService, Message}, AppState};
 use axum::{extract::State, routing::post, Json};
-use dixxxie::{controller::Controller, response::{HttpMessage, HttpResult}};
-use lettre::SmtpTransport;
+use adjust::{controller::Controller, response::{HttpMessage, HttpResult}};
 
 pub struct MailController;
 
 impl MailController {
   async fn send(
-    State(transport): State<SmtpTransport>,
+    State(state): State<AppState>,
     Json(message): Json<Message>,
-  ) -> HttpResult<Json<HttpMessage>> {
-    MailService::send(message, transport)
+  ) -> HttpResult<HttpMessage> {
+    MailService::send(message, state.transport)
   }
 }
 
-impl Controller<SmtpTransport> for MailController {
-  fn register(&self, router: axum::Router<SmtpTransport>) -> axum::Router<SmtpTransport> {
+impl Controller<AppState> for MailController {
+  fn new() -> anyhow::Result<Box<Self>>{
+    Ok(Box::new(Self))
+  }
+
+  fn register(&self, router: axum::Router<AppState>) -> axum::Router<AppState> {
     router
       .route("/send", post(Self::send))
   }
