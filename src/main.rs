@@ -13,6 +13,8 @@ pub struct AppState {
 
 #[main]
 async fn main() -> Service<'_, AppState> {
+  adjust::server::WebServer::enviroment();
+
   let transport = transport::get_connection()
     .expect("failed to establish connection with smtp server");
 
@@ -20,6 +22,6 @@ async fn main() -> Service<'_, AppState> {
     name: "Mail",
     state: AppState { transport },
     controllers: controllers![MailController],
-    port: None
+    port: Some(1400)
   }
 }

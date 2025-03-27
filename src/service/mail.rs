@@ -42,6 +42,8 @@ impl MailService {
 
       if let Err(err) = sended {
         log::error!("{err}");
+
+        return Err(err)
       }
 
       // короче это нужно для указания return type = anyhow::Result
