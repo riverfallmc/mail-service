@@ -13,9 +13,9 @@ dependencies = [
 
 [[package]]
 name = "adjust"
-version = "0.1.24"
+version = "0.1.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1ffd42c4ddb46c90bf24add484471bd9904e8f371fd2de869827ef98cc29cbdf"
+checksum = "0becdf9c22ea0a7abef6b97a122ce53105230b7245f29ef2d5518d62afe2437d"
 dependencies = [
  "adjust_macro",
  "anyhow",
@@ -894,12 +894,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "lazy_static"
-version = "1.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
-
-[[package]]
 name = "lettre"
 version = "0.11.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -960,13 +954,12 @@ checksum = "30bde2b3dc3671ae49d8e2e9f044c7c005836e7a023ee57cffa25ab82764bb9e"
 
 [[package]]
 name = "mail-service"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "adjust",
  "anyhow",
  "axum",
  "chrono",
- "lazy_static",
  "lettre",
  "log",
  "serde",
